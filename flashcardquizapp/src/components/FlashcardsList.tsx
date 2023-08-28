@@ -1,14 +1,19 @@
 import React from 'react'
 import Flashcards from './Flashcards'
 
-export const FlashcardsList = () => {
+interface Flashcard {
+    id: number;
+    question: string;
+    answer: string;
+    options: string[];
+}
 
-    interface Flashcard {
-        id: number;
-        question: string;
-        answer: string;
-        options: string[];
-    }
+interface FlashcardsListProps {
+    flashcards: Flashcard[];
+}
+
+const FlashcardsList = ({flashcards}: FlashcardsListProps) => {
+
     
   return (
     <div className='card-grid'>
