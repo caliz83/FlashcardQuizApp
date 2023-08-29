@@ -1,7 +1,7 @@
 import React from 'react'
 import Flashcards from './Flashcards'
 
-interface Flashcard {
+export interface Flashcard {
     id: number;
     question: string;
     answer: string;
@@ -18,7 +18,7 @@ const FlashcardsList = ({flashcards}: FlashcardsListProps) => {
   return (
     <div className='card-grid'>
         {flashcards.map(flashcard: Flashcard => {
-            <Flashcards flashcard={flashcard} key={flashcard.id} />
+            <Flashcards flashcard={...FlashcardProps, flashcard} key={Flashcard.id} />
         })}      
     </div>
   )
