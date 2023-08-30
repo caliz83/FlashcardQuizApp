@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
-import FlashcardsList, { Flashcard } from './FlashcardsList';
+// import FlashcardsList, { Flashcard } from './FlashcardsList';
 
-// interface Flashcard {
-//     id: number;
-//     question: string;
-//     answer: string;
-//     options: string[];
-// }
-
-interface FlashcardProps {
-    flashcard: Flashcard;
+interface Flashcard {
+    id: number;
+    question: string;
+    answer: string;
+    options: string[];
 }
 
-const Flashcards = ( {flashcard}: FlashcardProps ) => {
+interface FlashcardProps {
+    flashcards: Flashcard;
+}
+
+const Flashcards = ( {flashcards}: FlashcardProps ) => {
 
     const [flip, setFlip] = useState(false);
     const [height, setHeight] = useState<number | string>('initial');
@@ -20,35 +20,35 @@ const Flashcards = ( {flashcard}: FlashcardProps ) => {
     const frontEl = useRef(null);
     const backEl = useRef(null);  
     
-    function setMaxHeight() {
-        if(frontEl.current && backEl.current) {
-            const frontHeight = frontEl.current.getBoundingClientRect().height;
-            const backHeight = backEl.current.getBoundingClientRect().height;
-            //change to const [rect, setRect] = useState(getRect(current)); or...?????
-            setHeight(Math.max(frontHeight, backHeight, 100));
-        }
-    }
+    // function setMaxHeight() {
+    //     if(frontEl.current && backEl.current) {
+    //         const frontHeight = frontEl.current.getBoundingClientRect().height;
+    //         const backHeight = backEl.current.getBoundingClientRect().height;
+    //         //change to const [rect, setRect] = useState(getRect(current)); or...?????
+    //         setHeight(Math.max(frontHeight, backHeight, 100));
+    //     }
+    // }
 
-    useEffect(setMaxHeight, [flashcard.question, flashcard.answer, flashcard.options]);
-    useEffect(() => {
-        window.addEventListener('resize', setMaxHeight);
-        return () => {
-            window.removeEventListener('resize', setMaxHeight);
-        }    
-    }, [])
+    // useEffect(setMaxHeight, [flashcards.question, flashcards.answer, flashcards.options]);
+    // useEffect(() => {
+    //     window.addEventListener('resize', setMaxHeight);
+    //     return () => {
+    //         window.removeEventListener('resize', setMaxHeight);
+    //     }    
+    // }, [])
 
   return (
     <div onClick={() => setFlip(!flip)} className={`card ${flip ? 'flip' : ''}`} style={{height : height}}>
     <div className='front' ref={frontEl}>
-        {flashcard.question}  
+        {flashcards.question}  
         <div className='flashcard-options'>
-            {flashcard.options.map(option => (
+            {flashcards.options.map(option => (
                 <div key={option} className='flashcard-option'>{option}</div>
 
             ))}            
             </div>    
     </div>
-    <div className='back' ref={backEl}>{flashcard.answer}</div>
+    <div className='back' ref={backEl}>{flashcards.answer}</div>
     {/* {flip ? flashcard.answer : flashcard.question} */}
     </div>
   )

@@ -18,7 +18,7 @@ interface Category {
 }
 
 const App = () => {
-  const [flashcards, setFlashcards] = useState<Flashcard[]>(TestIt);
+  const [flashcards, setFlashcards] = useState<Flashcard[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   
   const categoryEl = useRef(null);
@@ -54,7 +54,7 @@ const App = () => {
   function decodeWeirdness(str: string): string {
     const textArea = document.createElement('textArea');
     textArea.innerHTML = str;
-    return textArea.value;
+    return textArea.innerHTML;
   }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {

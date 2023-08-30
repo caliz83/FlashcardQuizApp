@@ -17,8 +17,8 @@ const FlashcardsList = ({flashcards}: FlashcardsListProps) => {
     
   return (
     <div className='card-grid'>
-        {flashcards.map(flashcard: Flashcard => {
-            <Flashcards flashcard={...FlashcardProps, flashcard} key={Flashcard.id} />
+        {flashcards.map(flashcard => {
+           return <Flashcards flashcards={flashcard} key={flashcard.id} />
         })}      
     </div>
   )
