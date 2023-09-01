@@ -74,7 +74,7 @@ const App = () => {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     axios
-      .get("https://opentdb.com/api.php?", {
+      .get("https://opentdb.com/api.php", {
         params: {
           amount: amountRef.current?.value,
           category: categoryElement.current?.value,
@@ -82,19 +82,16 @@ const App = () => {
       })
       .then((response) => {
         setFlashcards(
-          response.data.results.map((questions: any, index: number) => {
-            const answer = questions.correct_answer;
-            const options = [
-              ...questions.incorrect_answers.map(
-                (name: string) => name,
-                answer
-              ),
-            ];
+          response.data.results.map((questionItem: QuestionItem, index: number) => {
+            const correctAnswer = decodeWeirdness(questionItem.correct_answer);
+            const options = questionItem.incorrect_answers.map(
+                (a: string) => decodeWeirdness(a)
+              );
             return {
               id: `${index}-${Date.now()}`,
-              question: decodeWeirdness(questions.question),
-              answer: answer,
-              options: options.sort(() => Math.random() - 0.5),
+              question: decodeWeirdness(questionItem.question),
+              answer: correctAnswer,
+              options: [...options, correctAnswer].sort(() => Math.random() - 0.5),
             };
           })
         );
