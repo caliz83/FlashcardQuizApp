@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import "../src/App.css";
 import FlashcardsList from "./components/FlashcardsList";
-// import { Button } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
+
 
 export interface Flashcard {
   id: number;
@@ -125,7 +126,7 @@ const App = () => {
           />
         </div>
         <div className="form-group">
-          <button className="btn">Go!</button>
+          <Button type="submit" className="btn">Go!</Button>
         </div>
       </form>
       <div className="container">
